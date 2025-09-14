@@ -1,0 +1,51 @@
+Now, update your requirements.txt file:
+
+Flask==2.3.2
+Setup Instructions
+Step 1: Install Dependencies
+pip install -r requirements.txt
+Step 2: Run the Application
+python cybersecurity_platform.py
+Step 3: Access the Platform
+Open your browser and go to http://localhost:5000
+
+Project Structure
+After running the application, your project structure will look like:
+
+Cybersecurity Awareness/
+├── cybersecurity_platform.py
+├── requirements.txt
+├── cybersecurity_training.db
+└── templates/
+    ├── base.html
+    ├── dashboard.html
+    ├── modules.html
+    ├── users.html
+    └── reports.html
+
+
+
+
+
+Key Features
+
+Dashboard: Overview of key metrics
+Training Modules: Manage cybersecurity training content
+User Management: Track user progress and risk levels
+Reports: Security metrics and analytics
+Local Database: SQLite for data storage
+Responsive UI: Works on desktop and mobile
+
+
+Customization
+Add new training modules by inserting records into the modules table
+Modify HTML templates for branding
+Extend API endpoints for additional features
+Add authentication for production deployment
+This implementation should work without any errors. The key changes I made:
+
+Embedded HTML templates as strings in the Python file
+Added a function to create template files on first run
+Used render_template_string instead of render_template
+Simplified the setup process
+Run the application with python cybersecurity_platform.py and access it at http://localhost:5000.

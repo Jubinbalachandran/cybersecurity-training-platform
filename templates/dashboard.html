@@ -1,0 +1,125 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Stats Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-lg">
+                    <i class="fas fa-users text-blue-600"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm text-gray-500">Total Users</p>
+                    <p class="text-2xl font-bold">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-lg">
+                    <i class="fas fa-book-open text-green-600"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm text-gray-500">Training Modules</p>
+                    <p class="text-2xl font-bold">{{ total_modules }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-yellow-100 rounded-lg">
+                    <i class="fas fa-graduation-cap text-yellow-600"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm text-gray-500">Completed Trainings</p>
+                    <p class="text-2xl font-bold">{{ completed_trainings }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-red-100 rounded-lg">
+                    <i class="fas fa-exclamation-triangle text-red-600"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm text-gray-500">High Risk Users</p>
+                    <p class="text-2xl font-bold">{{ high_risk_users }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Placeholder -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-semibold mb-4">Training Progress</h3>
+            <div class="h-64 flex items-center justify-center bg-gray-100 rounded">
+                <p class="text-gray-500">Training Progress Chart</p>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-semibold mb-4">User Risk Distribution</h3>
+            <div class="h-64 flex items-center justify-center bg-gray-100 rounded">
+                <p class="text-gray-500">Risk Distribution Chart</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-lg shadow">
+        <div class="p-4 border-b">
+            <h3 class="text-lg font-semibold">Recent Training Activity</h3>
+        </div>
+        <div class="p-4">
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-3 border rounded-lg">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-green-100 rounded-lg">
+                            <i class="fas fa-check-circle text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-medium">Phishing Awareness</p>
+                            <p class="text-sm text-gray-500">Completed by Alex Johnson</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        2023-05-15
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 border rounded-lg">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-green-100 rounded-lg">
+                            <i class="fas fa-check-circle text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-medium">Data Protection</p>
+                            <p class="text-sm text-gray-500">Completed by Sarah Chen</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        2023-04-22
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Fetch stats data and update dashboard
+fetch('/api/stats')
+    .then(response => response.json())
+    .then(data => {
+        document.querySelector('.bg-blue-100 + div .text-2xl').textContent = data.total_users;
+        document.querySelector('.bg-green-100 + div .text-2xl').textContent = data.total_modules;
+        document.querySelector('.bg-yellow-100 + div .text-2xl').textContent = data.completed_trainings;
+        document.querySelector('.bg-red-100 + div .text-2xl').textContent = data.high_risk_users;
+    });
+</script>
+{% endblock %}
