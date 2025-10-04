@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard | Cybersecurity Training Platform</title>
+</head>
+<body>
+<div class="dashboard-widget" style="padding:1em; border:1px solid #ccc; margin-bottom:1em;">
+    <h3>Password Hygiene</h3>
+    <ul>
+        <li><a href="{{ url_for('password.best_practices') }}">Password Best Practices</a></li>
+        <li><a href="{{ url_for('password.password_check') }}">Password Strength Checker</a></li>
+    </ul>
+</div>
+<!-- ...inside the <body> -->
+<p>
+    <a href="{{ url_for('admin.report') }}">View Training Progress Report</a>
+</p>
+    <h1>Welcome, Admin {{ current_user.username }}</h1>
+    <nav>
+        <a href="{{ url_for('training.index') }}">Training Modules</a> |
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </nav>
+    <p>This is the admin dashboard. Features available are determined by the superadmin.</p>
+</body>
+</html>

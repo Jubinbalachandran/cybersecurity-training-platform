@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Training Progress Report (PDF)</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; }
+        th, td { padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Training Progress Report</h1>
+    <table>
+        <tr>
+            <th>Username</th>
+            {% for module in modules %}
+                <th>{{ module.title }}</th>
+            {% endfor %}
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                {% for module in modules %}
+                    <td>
+                        {% if progress_dict.get((user.id, module.id), False) %}
+                            ✅
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

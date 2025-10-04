@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Training Progress Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- ...existing content and table... -->
+
+    <h2>User Completion % (Bar Chart)</h2>
+    <canvas id="userChart" width="400" height="150"></canvas>
+    <h2>Module Completion % (Bar Chart)</h2>
+    <canvas id="moduleChart" width="400" height="150"></canvas>
+
+    <script>
+      // User Completion Bar Chart
+      const userCtx = document.getElementById('userChart').getContext('2d');
+      const userChart = new Chart(userCtx, {
+        type: 'bar',
+        data: {
+          labels: {{ user_labels|tojson }},
+          datasets: [{
+            label: '% Complete',
+            data: {{ user_data|tojson }},
+            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, max: 100 }
+          }
+        }
+      });
+
+      // Module Completion Bar Chart
+      const moduleCtx = document.getElementById('moduleChart').getContext('2d');
+      const moduleChart = new Chart(moduleCtx, {
+        type: 'bar',
+        data: {
+          labels: {{ module_labels|tojson }},
+          datasets: [{
+            label: '% Complete',
+            data: {{ module_data|tojson }},
+            backgroundColor: 'rgba(255, 99, 132, 0.6)'
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, max: 100 }
+          }
+        }
+      });
+    </script>
+    <p><a href="{{ url_for('admin.dashboard') }}">Back to dashboard</a></p>
+</body>
+</html>

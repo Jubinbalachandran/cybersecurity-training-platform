@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Policies</title>
+</head>
+<body>
+    <h1>Security Policies</h1>
+    <ul>
+    {% for policy in policies %}
+        <li>
+            <a href="{{ url_for('policy.policy_view', policy_id=policy.id) }}">{{ policy.title }}</a>
+            {% if policy.id in acknowledged %}
+                <span style="color:green;">(Acknowledged)</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Access - Sign In</title>
+</head>
+<body>
+    <h2>Document Access Required</h2>
+    <form method="post">
+        <label>Email Address:<br>
+            <input type="email" name="email" required>
+        </label><br><br>
+        <label>Password:<br>
+            <input type="password" name="password" required>
+        </label><br><br>
+        <button type="submit">Sign In to View Document</button>
+    </form>
+    <form method="post" style="margin-top: 20px;">
+        <input type="hidden" name="report_phish" value="yes">
+        <button type="submit" style="background:orange;color:white;">Report as Phish</button>
+    </form>
+    <p style="color:gray; font-size:small;">For demonstration and training purposes only.</p>
+</body>
+</html>

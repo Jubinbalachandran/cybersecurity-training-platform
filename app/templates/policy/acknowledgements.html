@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Policy Acknowledgements</title>
+</head>
+<body>
+    <h1>Policy Acknowledgements</h1>
+    <table border="1">
+        <tr>
+            <th>User</th>
+            {% for policy in policies %}
+                <th>{{ policy.title }}</th>
+            {% endfor %}
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            {% for policy in policies %}
+                <td>
+                {% if (user.id, policy.id) in ack_map %}
+                    {{ ack_map[(user.id, policy.id)] }}
+                {% else %}
+                    <span style="color:red;">Not Acknowledged</span>
+                {% endif %}
+                </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

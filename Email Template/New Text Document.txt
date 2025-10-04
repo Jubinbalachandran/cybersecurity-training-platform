@@ -1,0 +1,27 @@
+<p>Hello,</p>
+<p>You have a new secure document waiting. Please review it at the link below:</p>
+<p><a href="{{tracking_url}}">Click here to review your document</a></p>
+<p>Thank you,<br>IT Security Team</p>
+<img src="{{pixel_url}}" alt="" style="display:none;width:1px;height:1px;" />
+
+
+
+templates = [
+    {
+        "name": "Fake Password Reset",
+        "subject": "Immediate Action Required: Password Reset",
+        "body_html": "<p>We've detected suspicious activity... <a href='{{tracking_url}}'>Reset Password</a></p><img src='{{pixel_url}}' style='display:none;'/>",
+        "body_text": "We've detected suspicious activity. Reset: {{tracking_url}}"
+    },
+    {
+        "name": "Fake Invoice",
+        "subject": "Invoice Due: Action Needed",
+        "body_html": "<p>Please review your invoice: <a href='{{tracking_url}}'>View Invoice</a></p><img src='{{pixel_url}}' style='display:none;'/>",
+        "body_text": "Please review your invoice: {{tracking_url}}"
+    },
+    # Add more...
+]
+for t in templates:
+    template = PhishingTemplate(**t)
+    db.session.add(template)
+db.session.commit()

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Phishing Analytics Dashboard</h1>
+
+    <h2>Aggregate Campaign Statistics</h2>
+    <ul>
+        <li>Total Targets: {{ total_targets }}</li>
+        <li>Emails Opened: {{ opened }}</li>
+        <li>Links Clicked: {{ clicked }}</li>
+        <li>Data Submitted: {{ submitted }}</li>
+        <li>Reported as Phish: {{ reported }}</li>
+    </ul>
+
+    <canvas id="statsChart" width="600" height="200"></canvas>
+    <script>
+    const ctx = document.getElementById('statsChart').getContext('2d');
+    const statsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Opened', 'Clicked', 'Submitted', 'Reported'],
+            datasets: [{
+                label: 'Count',
+                data: [{{ opened }}, {{ clicked }}, {{ submitted }}, {{ reported }}],
+                backgroundColor: [
+                    'rgba(54,162,235,0.7)',
+                    'rgba(255,99,132,0.7)',
+                    'rgba(255,206,86,0.7)',
+                    'rgba(75,192,192,0.7)'
+                ]
+            }]
+        },
+        options: { scales: { y: { beginAtZero: true } } }
+    });
+    </script>
+
+    <h2>User Risk Scores</h2>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>User</th>
+            <th>Risk Score</th>
+            <th>Risk Level</th>
+            <th>Repeat Offender?</th>
+        </tr>
+        {% for uid, user in users.items() %}
+        <tr {% if uid in repeat_offenders %} style="background:#ffcccc;" {% endif %}>
+            <td>{{ user.username }}</td>
+            <td>{{ user_risk[uid] }}</td>
+            <td>{{ risk_level(user_risk[uid]) }}</td>
+            <td>{% if uid in repeat_offenders %}Yes{% else %}No{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{{ url_for('admin.dashboard') }}">Back to Admin Dashboard</a></p>
+</body>
+</html>

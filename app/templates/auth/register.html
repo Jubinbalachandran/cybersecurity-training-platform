@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Superadmin | Cybersecurity Training Platform</title>
+</head>
+<body>
+    <h1>Register Superadmin</h1>
+    <form method="POST">
+        <label>Username:<br>
+            <input type="text" name="username" required>
+        </label><br>
+        <label>Password:<br>
+            <input type="password" name="password" required>
+        </label><br>
+        <button type="submit">Register</button>
+    </form>
+    <p>
+        <a href="{{ url_for('auth.login') }}">Back to Login</a>
+    </p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

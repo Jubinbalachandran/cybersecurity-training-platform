@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ survey.title }}</title>
+</head>
+<body>
+    <h2>{{ survey.title }}</h2>
+    <p>{{ survey.description }}</p>
+    <form method="post">
+        {% for question in questions %}
+            <div>
+                <label>{{ question.question }}</label><br>
+                {% set choices = question.choices | fromjson %}
+                {% for choice in choices %}
+                    <input type="radio" name="q{{ question.id }}" value="{{ choice }}" required> {{ choice }}<br>
+                {% endfor %}
+            </div>
+            <br>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

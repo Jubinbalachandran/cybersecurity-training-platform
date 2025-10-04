@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Training Modules | Cybersecurity Training Platform</title>
+</head>
+<body>
+    <h1>Training Modules</h1>
+    <nav>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </nav>
+    {% if current_user.role in ['superadmin', 'admin'] %}
+        <a href="{{ url_for('training.add') }}">Add Training Module</a>
+    {% endif %}
+    <ul>
+        {% for module in modules %}
+            <li>
+                <a href="{{ url_for('training.view', module_id=module.id) }}">{{ module.title }}</a>
+                {% if module.id in completed %}
+                    <span style="color: green;">[Completed]</span>
+                {% endif %}
+                {% if current_user.role in ['superadmin', 'admin'] %}
+                    | <a href="{{ url_for('training.edit', module_id=module.id) }}">Edit</a>
+                    | <form action="{{ url_for('training.delete', module_id=module.id) }}" method="post" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this module?')">Delete</button>
+                      </form>
+                {% endif %}
+            </li>
+        {% else %}
+            <li>No training modules available.</li>
+        {% endfor %}
+    </ul>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

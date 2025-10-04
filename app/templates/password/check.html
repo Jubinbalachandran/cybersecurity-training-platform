@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Strength Checker</title>
+</head>
+<body>
+    <h2>Password Strength Checker</h2>
+    <form id="passwordForm">
+        <label>Enter a password to check: <input type="password" name="password" id="passwordInput"></label>
+        <button type="submit">Check Strength</button>
+    </form>
+    <div id="result"></div>
+    <script>
+    document.getElementById('passwordForm').onsubmit = async function(e){
+        e.preventDefault();
+        let pwd = document.getElementById('passwordInput').value;
+        let resp = await fetch('', {
+            method: 'POST',
+            body: new URLSearchParams({'password': pwd}),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
+        let data = await resp.json();
+        document.getElementById('result').innerHTML =
+            '<b>Strength:</b> ' + data.strength + '<br>' +
+            (data.feedback.length ? '<b>Suggestions:</b><ul>' + data.feedback.map(f => '<li>'+f+'</li>').join('') + '</ul>' : '');
+    };
+    </script>
+    <p>Tip: Never use your real password here—try examples!</p>
+</body>
+</html>

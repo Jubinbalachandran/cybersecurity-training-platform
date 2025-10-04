@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superadmin Dashboard | Cybersecurity Training Platform</title>
+</head>
+<body>
+<div class="dashboard-widget" style="padding:1em; border:1px solid #ccc; margin-bottom:1em;">
+    <h3>Password Hygiene</h3>
+    <ul>
+        <li><a href="{{ url_for('password.best_practices') }}">Password Best Practices</a></li>
+        <li><a href="{{ url_for('password.password_check') }}">Password Strength Checker</a></li>
+    </ul>
+</div>
+    <h1>Welcome, Superadmin {{ current_user.username }}</h1>
+    <nav>
+        <a href="{{ url_for('training.index') }}">Training Modules</a> |
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </nav>
+    <h2>Superadmin Controls</h2>
+    <ul>
+        <li>Set user license limit</li>
+        <li>Enable/disable features</li>
+        <li>Toggle demo mode</li>
+        <li>Manage admins/users</li>
+    </ul>
+    <p>(Feature management UI to be implemented)</p>
+</body>
+</html>

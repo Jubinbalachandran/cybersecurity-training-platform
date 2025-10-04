@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Training Module | Cybersecurity Training Platform</title>
+</head>
+<body>
+    <h1>Edit Training Module</h1>
+    <form method="POST">
+        <label>Title:<br>
+            <input type="text" name="title" value="{{ module.title }}" required>
+        </label><br>
+        <label>Content:<br>
+            <textarea name="content" rows="10" cols="50" required>{{ module.content }}</textarea>
+        </label><br>
+        <button type="submit">Save Changes</button>
+    </form>
+    <p><a href="{{ url_for('training.index') }}">Back to modules list</a></p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Campaigns</title>
+</head>
+<body>
+    <h1>Phishing Campaigns</h1>
+    <a href="{{ url_for('phishing.campaigns_add') }}">Create New Campaign</a>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Name</th>
+            <th>Template</th>
+            <th>Launch Time</th>
+            <th>Actions</th>
+        </tr>
+        {% for campaign in campaigns %}
+        <tr>
+            <td>{{ campaign.name }}</td>
+            <td>{{ campaign.template.name }}</td>
+            <td>{{ campaign.launch_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>
+                <a href="{{ url_for('phishing.campaign_results', campaign_id=campaign.id) }}">Results</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="{{ url_for('admin.dashboard') }}">Back to Dashboard</a></p>
+</body>
+</html>

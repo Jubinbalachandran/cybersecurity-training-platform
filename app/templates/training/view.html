@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ module.title }} | Cybersecurity Training Platform</title>
+</head>
+<body>
+    <h1>{{ module.title }}</h1>
+    <div>
+        {{ module.content | safe }}
+    </div>
+    {% if is_completed %}
+        <p style="color: green;">You have completed this module.</p>
+    {% else %}
+        <form method="POST" action="{{ url_for('training.complete', module_id=module.id) }}">
+            <button type="submit">Mark as Completed</button>
+        </form>
+    {% endif %}
+    <p><a href="{{ url_for('training.index') }}">Back to modules list</a></p>
+</body>
+</html>

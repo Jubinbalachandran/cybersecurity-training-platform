@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Campaign Results</title>
+</head>
+<body>
+    <h1>Results: {{ campaign.name }}</h1>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>User</th>
+            <th>Email Sent</th>
+            <th>Email Opened</th>
+            <th>Link Clicked</th>
+            <th>Data Submitted</th>
+            <th>Reported as Phish</th>
+        </tr>
+        {% for target in targets %}
+        <tr>
+            <td>{{ users[target.user_id].username }}</td>
+            <td>{{ target.email_sent if target.email_sent else '-' }}</td>
+            <td>{{ target.email_opened if target.email_opened else '-' }}</td>
+            <td>{{ target.link_clicked if target.link_clicked else '-' }}</td>
+            <td>{{ target.data_submitted if target.data_submitted else '-' }}</td>
+            <td>{{ target.reported_phish if target.reported_phish else '-' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="{{ url_for('phishing.campaigns_list') }}">Back to Campaigns</a></p>
+</body>
+</html>

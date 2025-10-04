@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ policy.title }}</title>
+</head>
+<body>
+    <h2>{{ policy.title }}</h2>
+    <div style="white-space: pre-line;">{{ policy.content }}</div>
+    {% if not acknowledged %}
+    <form method="post">
+        <button type="submit">Acknowledge Policy</button>
+    </form>
+    {% else %}
+    <p style="color:green;">You have acknowledged this policy.</p>
+    {% endif %}
+    <a href="{{ url_for('policy.policy_list') }}">Back to Policy List</a>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ survey.title }} - Results</title>
+</head>
+<body>
+    <h2>Survey Results: {{ survey.title }}</h2>
+    {% for question in questions %}
+        <h4>{{ question.question }}</h4>
+        <ul>
+            {% set counts = analytics[question.id] %}
+            {% for choice, count in counts.items() %}
+                <li>{{ choice }}: {{ count }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <h3>All Responses</h3>
+    <table border="1">
+        <tr>
+            <th>User</th>
+            <th>Answers</th>
+            <th>Completed At</th>
+        </tr>
+        {% for r in responses %}
+        <tr>
+            <td>{{ r.user_id }}</td>
+            <td>
+                {% for k, v in r.answers|fromjson.items() %}
+                    {{ k }}: {{ v }}<br>
+                {% endfor %}
+            </td>
+            <td>{{ r.completed_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
